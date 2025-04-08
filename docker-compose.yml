@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: traefik:v3.0
+    image: traefik:v2.10
     container_name: traefik
     restart: always
     command:
@@ -12,12 +12,6 @@ services:
       - "--certificatesresolvers.letsencrypt.acme.email=rppratama1771@gmail.com"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
       - "--api.dashboard=true"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.pace11.my.id`)"
-      - "traefik.http.routers.traefik.entrypoints=websecure"
-      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.traefik.service=api@internal"
     ports:
       - "80:80"
       - "443:443"
@@ -26,6 +20,12 @@ services:
       - "./traefik/traefik.yml:/etc/traefik/traefik.yml"
       - "./traefik/dynamic.yml:/etc/traefik/dynamic.yml"
       - "./traefik/acme.json:/letsencrypt/acme.json"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.pace11.my.id`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.traefik.service=api@internal"
     networks:
       - web
 
