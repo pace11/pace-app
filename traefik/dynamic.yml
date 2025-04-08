@@ -1,9 +1,0 @@
-http:
-  routers:
-    traefik:
-      rule: "Host(`traefik.pace11.my.id`)"
-      entryPoints:
-        - websecure
-      service: api@internal
-      tls:
-        certResolver: letsencrypt
