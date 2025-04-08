@@ -1,11 +1,12 @@
 services:
   traefik:
-    image: traefik:v2.10
+    image: traefik:v3.0
     container_name: traefik
     restart: always
     command:
       - "--providers.docker=true"
       - "--providers.docker.network=web"
+      - "--providers.file.filename=/etc/traefik/dynamic.yml"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
@@ -20,12 +21,6 @@ services:
       - "./traefik/traefik.yml:/etc/traefik/traefik.yml"
       - "./traefik/dynamic.yml:/etc/traefik/dynamic.yml"
       - "./traefik/acme.json:/letsencrypt/acme.json"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.pace11.my.id`)"
-      - "traefik.http.routers.traefik.entrypoints=websecure"
-      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.traefik.service=api@internal"
     networks:
       - web
 
