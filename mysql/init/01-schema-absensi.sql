@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS absensi_db;
+
 USE absensi_db;
 
 CREATE TABLE `attendances` (
@@ -22,6 +24,7 @@ CREATE TABLE `setting` (
 	`clock_in` time NOT NULL,
 	`clock_out` time NOT NULL,
 	`coordinates` text,
+	`radius` int,
 	`created_at` timestamp DEFAULT (now()),
 	`updated_at` timestamp DEFAULT (now()),
 	CONSTRAINT `setting_id` PRIMARY KEY(`id`)
