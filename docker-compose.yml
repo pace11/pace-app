@@ -32,6 +32,15 @@ services:
     expose:
       - 3000
 
+  service-go:
+    build: ./service-go
+    container_name: service-go
+    restart: always
+    networks:
+      - backend
+    expose:
+      - 4000
+
   nginx:
     image: nginx:latest
     container_name: nginx
