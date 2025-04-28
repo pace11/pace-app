@@ -55,8 +55,10 @@ services:
     depends_on:
       - absensi
       - phpmyadmin
+      - service-go
     networks:
       - frontend
+      - backend
 
   certbot:
     image: certbot/certbot
