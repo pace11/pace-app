@@ -40,6 +40,10 @@ services:
       - backend
     expose:
       - 4000
+    env_file:
+      - ./service-go/.env
+    depends_on:
+      - mysql
 
   nginx:
     image: nginx:latest
