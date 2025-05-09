@@ -32,6 +32,15 @@ services:
     expose:
       - 3000
 
+  recipe-foods:
+    build: ./share-recipe-foods
+    container_name: recipe-foods
+    networks:
+      - frontend
+      - backend
+    expose:
+      - 3000
+
   service-go:
     build: ./service-go
     container_name: service-go
