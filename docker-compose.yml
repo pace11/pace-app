@@ -35,6 +35,8 @@ services:
   recipe-foods:
     build: ./share-recipe-foods
     container_name: recipe-foods
+    env_file:
+      - ./share-recipe-foods/.env.prod
     networks:
       - frontend
       - backend
