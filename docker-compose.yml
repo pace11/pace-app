@@ -56,6 +56,17 @@ services:
     depends_on:
       - mysql
 
+  cycloop:
+    build: ./cycloop
+    container_name: cycloop
+    restart: always
+    networks:
+      - backend
+    expose:
+      - 4100
+    env_file:
+      - ./cycloop/.env
+
   nginx:
     image: nginx:latest
     container_name: nginx
