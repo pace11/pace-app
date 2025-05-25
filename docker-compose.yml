@@ -110,6 +110,7 @@ services:
 
   postgres:
     image: postgres:13
+    container_name: postgres
     restart: always
     networks:
       - backend
@@ -122,6 +123,7 @@ services:
 
   redis:
     image: redis:alpine
+    container_name: redis
     restart: always
     networks:
       - backend
