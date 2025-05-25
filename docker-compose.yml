@@ -86,6 +86,44 @@ services:
       - frontend
       - backend
 
+  outline:
+    image: outlinewiki/outline:latest
+    restart: always
+    networks:
+      - backend
+    environment:
+      SECRET_KEY: ${OL_SECRET_KEY}
+      UTILS_SECRET: ${OL_UTILS_SECRET}
+      DATABASE_URL: ${OL_DB_URL}
+      REDIS_URL: ${OL_REDIS_URL}
+      URL: ${OL_URL}
+      GOOGLE_CLIENT_ID: ${OL_GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${OL_GOOGLE_CLIENT_SECRET}
+      GOOGLE_ALLOWED_DOMAINS: ${OL_URL}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:13
+    restart: always
+    networks:
+      - backend
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+
+  redis:
+    image: redis:alpine
+    restart: always
+    networks:
+      - backend
+
   certbot:
     image: certbot/certbot
     container_name: certbot
@@ -95,9 +133,11 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do sleep 3600; done'"
     networks:
       - frontend
+      - backend
 
 volumes:
   mysql-data:
+  pgdata:
 
 networks:
   frontend:
