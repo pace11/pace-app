@@ -42,6 +42,15 @@ services:
       - backend
     expose:
       - 3000
+      
+  my-pages:
+    build: ./my-pages
+    container_name: my-pages
+    networks:
+      - frontend
+      - backend
+    expose:
+      - 3000
 
   service-go:
     build: ./service-go

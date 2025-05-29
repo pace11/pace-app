@@ -13,3 +13,6 @@ sudo docker run --rm \
   --agree-tos \
   --no-eff-email \
   -d domainkau.com
+
+# run manual delete certbot spesific domain
+docker run --rm -v $(pwd)/certbot/conf:/etc/letsencrypt certbot/certbot delete --cert-name domainkau.com
