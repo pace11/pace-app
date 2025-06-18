@@ -163,8 +163,8 @@ services:
     restart: unless-stopped
     environment:
       ADMIN_TOKEN: ${VW_ADMIN_TOKEN}
-      SIGNUPS_ALLOWED: ${VW_SIGNUPS_ALLOWED}
-      WEBSOCKET_ENABLED: ${VW_WEBSOCKET_ENABLED}
+      SIGNUPS_ALLOWED: true
+      WEBSOCKET_ENABLED: true
     volumes:
       - vaultwarden-data:/data
     expose:
